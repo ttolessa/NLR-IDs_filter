@@ -75,10 +75,10 @@ awk '{print $1 " "$6 " " $7}' ./${genomebase}_NLR_IDs/${genomebase}_protein_nlri
 # THE FOLLOWING SCRIPT IS TO DETERMINE THE NUMBER OF NLR-ARCITECTURES WITH AND WITHOUT INTEGRATED DOMAINS                                                                                                          ################################################################################################################
 
 # Filter out the gene id of each amino acid sequence, ignore the prefix (base/species) name and save in separate file to be used to extract linked NLR-IDs
-cat ${genomebase}.NBLRR.aa | grep '^>' | sed 's/>Egrandis_101_V1_//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBLRR_geneid.txt
-cat ${genomebase}.NBTIRs.aa | grep '^>' | sed 's/>Egrandis_101_V1_//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBTIR_geneid.txt
-cat ${genomebase}.NBCoils.aa | grep '^>' | sed 's/>Egrandis_101_V1_//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBCoil_geneid.txt
-cat ${genomebase}.NBRNLs.aa | grep '^>' | sed 's/>Egrandis_101_V1_//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBRNL_geneid.txt
+cat ${genomebase}.NBLRR.aa | grep '^>' | sed 's/>Species basename//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBLRR_geneid.txt
+cat ${genomebase}.NBTIRs.aa | grep '^>' | sed 's/>Species basename//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBTIR_geneid.txt
+cat ${genomebase}.NBCoils.aa | grep '^>' | sed 's/>Species basename//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBCoil_geneid.txt
+cat ${genomebase}.NBRNLs.aa | grep '^>' | sed 's/>Species basename//g' > ./${genomebase}_NLR_IDs/${genomebase}_NBRNL_geneid.txt
 
 # Navigate the the directory
 cd ./${genomebase}_NLR_IDs
@@ -106,10 +106,10 @@ awk 'NR==FNR{arr[$0];next} $0 in arr' ${genomebase}_NBRNLid_geneid_pfid.txt ${ge
 	> ${genomebase}_NBRNL_id_number.txt
 
 # Extracting columns containing integrated domains identified in eadh NLR archtectures 
-cat ${genomebase}_NBLRR_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nEgrandis_NBLRRid' > ../../../NLRs_with_IDs/${genomebase}_NBLRR_multiids.txt
-cat ${genomebase}_NBTIR_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nEgrandis_NBTIRid' > ../../../NLRs_with_IDs/${genomebase}_NBTIR_multiids.txt 
-cat ${genomebase}_NBCOIL_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nEgrandis_NBCOILid' > ../../../NLRs_with_IDs/${genomebase}_NBCOIL_multiids.txt 
-cat ${genomebase}_NBRNL_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nEgrandis_NBRNLid' > ../../../NLRs_with_IDs/${genomebase}_NBRNL_multiids.txt
+cat ${genomebase}_NBLRR_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nSpecies_NBLRRid' > ../../../NLRs_with_IDs/${genomebase}_NBLRR_multiids.txt
+cat ${genomebase}_NBTIR_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nSpecies_NBTIRid' > ../../../NLRs_with_IDs/${genomebase}_NBTIR_multiids.txt 
+cat ${genomebase}_NBCOIL_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nSpecies_NBCOILid' > ../../../NLRs_with_IDs/${genomebase}_NBCOIL_multiids.txt 
+cat ${genomebase}_NBRNL_id_number.txt | cut -d ' ' -f3 | sed -e $'1i\\\nSpecies_NBRNLid' > ../../../NLRs_with_IDs/${genomebase}_NBRNL_multiids.txt
 
 # Detection for NLR gene clusters and head-to-head pairs. 
 # Two adjacent genes separated by a short intergenic distance and oriented in divergent (−+) transcription configuration
